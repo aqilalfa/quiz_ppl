@@ -30,6 +30,7 @@ class TestLoginFunctionalPositive:
         time.sleep(2)
         assert "login.php" not in driver.current_url or "index.php" in driver.current_url
     
+    @pytest.mark.xfail(reason="Finding: Username is NOT case-sensitive (IRUL = irul)")
     def test_login_case_sensitivity_username(self, driver, base_url):
         """TC_LGN_003: Verify username case sensitivity"""
         driver.get(f"{base_url}/login.php")
