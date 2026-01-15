@@ -119,6 +119,6 @@ jobs:
     
     - name: Run Stub/Driver Unit Tests
       run: |
-        python -m pytest tests/test_login.py::TestLoginWithStub tests/test_register.py::TestRegisterWithStub -v
+        python -m pytest tests/test_login_professional.py::TestLoginWithStubProfessional tests/test_register_professional.py::TestRegisterWithStubProfessional -v
       env:
         CI: true
