@@ -77,7 +77,7 @@ jobs:
     - name: Run Stub/Driver Tests (Unit Tests)
       run: |
         cd ${{ github.workspace }}
-        python -m pytest tests/test_login_professional.py::TestLoginWithStubProfessional tests/test_register_professional.py::TestRegisterWithStubProfessional -v --tb=short
+        python -m pytest tests/test_login_all_screenshots.py::TestLoginWithStub tests/test_register_all_screenshots.py::TestRegisterWithStub -v --tb=short
       env:
         CI: true
         BASE_URL: http://localhost:8080
@@ -85,7 +85,7 @@ jobs:
     - name: Run Selenium Tests
       run: |
         cd ${{ github.workspace }}
-        python -m pytest tests/test_login_professional.py tests/test_register_professional.py -v --tb=short --html=test-report.html --self-contained-html
+        python -m pytest tests/test_login_all_screenshots.py tests/test_register_all_screenshots.py -v --tb=short --html=test-report.html --self-contained-html
       env:
         CI: true
         GITHUB_ACTIONS: true
@@ -98,27 +98,3 @@ jobs:
         name: test-report
         path: test-report.html
         retention-days: 30
-
-  # Job untuk menjalankan hanya stub/driver tests (tanpa browser)
-  unit-tests:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-    
-    - name: Install Python dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest selenium webdriver-manager
-    
-    - name: Run Stub/Driver Unit Tests
-      run: |
-        python -m pytest tests/test_login_professional.py::TestLoginWithStubProfessional tests/test_register_professional.py::TestRegisterWithStubProfessional -v
-      env:
-        CI: true

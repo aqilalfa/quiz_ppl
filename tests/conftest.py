@@ -10,11 +10,20 @@ import os
 
 # Configuration
 BASE_URL = os.environ.get('BASE_URL', 'http://localhost:8080')
+SCREENSHOT_DIR = os.path.join(os.path.dirname(__file__), "screenshots")
+
+# Create screenshot directory if not exists
+os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
 @pytest.fixture(scope="session")
 def base_url():
     """Return the base URL for the application"""
     return BASE_URL
+
+@pytest.fixture(scope="session")
+def screenshot_dir():
+    """Return the screenshot directory path"""
+    return SCREENSHOT_DIR
 
 @pytest.fixture(scope="function")
 def driver():
